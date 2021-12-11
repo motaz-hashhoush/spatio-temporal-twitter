@@ -1,8 +1,7 @@
 .map-container {
   display: block;
-  width:auto;
+  width: auto;
   margin: 20px;
-
 }
 
 .map-frame {
@@ -12,5 +11,4 @@
 
 #map {
   height: 100%;
-  
 }

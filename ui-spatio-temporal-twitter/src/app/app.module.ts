@@ -8,13 +8,15 @@ import { FormMapComponent } from './map/form-map/form-map.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { NgxChartsModule } from '@swimlane/ngx-charts'
+import { NgChartsModule } from 'ng2-charts';
+import { BarPlotComponent } from './map/bar-plot/bar-plot.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     FormMapComponent,
+    BarPlotComponent,
     
   ],
   imports: [
@@ -22,7 +24,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts'
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxChartsModule,
+    NgChartsModule,
     BrowserAnimationsModule
   ],
   providers: [],

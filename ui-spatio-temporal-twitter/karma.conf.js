@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/spatio-temporal-twitter'),
+      dir: require('path').join(__dirname, './coverage/ui-spatio-temporal-twitter'),
       subdir: '.',
       reporters: [
         { type: 'html' },
