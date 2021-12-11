@@ -1,8 +1,8 @@
-form{
-    position: static;
-    margin: 20px;
-    padding: 20px;
-    background-color: rgba(218, 218, 218, 0.158)!important;
-    border: 2px solid black;
-    width: 30%;
+form {
+  position: static;
+  margin: 20px;
+  padding: 20px;
+  background-color: rgba(218, 218, 218, 0.158) !important;
+  border: 2px solid black;
+  width: 30%;
 }
