@@ -23,11 +23,16 @@ export class MapService {
 
   
 
-  getTweets(body: {lon: number, lat:number}): Observable<[]> {
+  // getTweets(body: {lon: number, lat:number}): Observable<[]> {
     
-    return this.http.get<[]>('http://localhost:3000/api/v1/get/qurey/'+ body.lon +'/' + body.lat)
-  }
+  //   return this.http.get<[]>('http://localhost:3000/api/v1/get/qurey/'+ body.lon +'/' + body.lat)
+  // }
 
+  getTweetsRectangle(body:Object): Observable<[]> {
+    
+    return this.http.post<[]>('http://localhost:3000/api/v1/get/qurey/', body)
+  }
+ 
     
   
 }

@@ -10,6 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgChartsModule } from 'ng2-charts';
 import { BarPlotComponent } from './map/bar-plot/bar-plot.component';
+import { NgApexchartsModule } from 'ng-apexcharts'
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
+import { DrawMapComponent } from './map/draw-map/draw-map.component';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +22,7 @@ import { BarPlotComponent } from './map/bar-plot/bar-plot.component';
     MapComponent,
     FormMapComponent,
     BarPlotComponent,
+    DrawMapComponent,
     
   ],
   imports: [
@@ -25,7 +31,11 @@ import { BarPlotComponent } from './map/bar-plot/bar-plot.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgChartsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgApexchartsModule,
+    LeafletDrawModule,
+    LeafletModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
