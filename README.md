@@ -1,5 +1,3 @@
-# spatio-temporal-twitter
-
 ## Exploratory Spatio-temporal Analysis of Twitter Stream
 A huge number of tweets are continuously emerging from all over the world on a daily basis. Analyzing these tweets is a strategic action to enable event discovery, hidden patterns extraction and other useful insights from within a specific area. <br><br>
 
@@ -9,6 +7,6 @@ The user of the system should see a one-page Web App that displays a map of a ce
 - Create a bounding box over the area s/he is interested in.
 - A diagram to show the distribution of tweets over time is displayed.
 - Then the user selects a single timestamp to explore the content of tweets in this area during this time period.  
-*. the top trendy tweets in this area are listed and scored
-*. word cloud
+1. the top trendy tweets in this area are listed and scored
+2. word cloud
 
