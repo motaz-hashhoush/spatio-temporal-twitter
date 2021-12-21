@@ -1,11 +1,15 @@
 
 
 
-<div class="bar" style="display: block">
-    <canvas baseChart
-    [datasets]="barChartData"
-    [labels]="mbarChartLabels"
-    ></canvas>
-    <!-- (chartClick)="onChartClick($event)" -->
+<div class="bar">
+
+    <apx-chart 
+    [series]="series" 
+    [chart]="chart" 
+    [title]="title"
+    [xaxis]="xaxis"
+    [plotOptions] ="plotOptions"
     
+    ></apx-chart>
 </div>
+

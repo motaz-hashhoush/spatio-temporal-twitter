@@ -30,7 +30,7 @@ app.listen(PORT, () =>{
     console.log(`server started in port ${PORT}`)
 })
 
-
+   /*
 app.get('/api/v1/get/qurey/:lon/:lat', async (req, res) => {
 
     
@@ -58,6 +58,43 @@ app.get('/api/v1/get/qurey/:lon/:lat', async (req, res) => {
         }
     }
 }})
+
+  res.status(200).json(searchResult.hits.hits)
+}) 
+*/
+
+app.post('/api/v1/get/qurey/', async (req, res) => {
+
+    
+   
+    console.log(req.body)
+    
+  const searchResult = await client.search({index: indexName, body: {
+
+    "size":10000,
+    "query": {
+        "bool" : {
+            "must" : {
+                "match_all" : {}
+            },
+            "filter" : {
+                "geo_bounding_box" : {
+                    "coordinates" : {
+                        "top_left": {
+                            "lat": req.body.top_left.lat,
+                            "lon":req.body.top_left.lng
+                          },
+                          "bottom_right": {
+                            "lat": req.body.bottom_right.lat,
+                            "lon": req.body.bottom_right.lng
+                          } 
+                    }
+                }
+            }
+        }
+    }
+}})
+
 
   res.status(200).json(searchResult.hits.hits)
 })

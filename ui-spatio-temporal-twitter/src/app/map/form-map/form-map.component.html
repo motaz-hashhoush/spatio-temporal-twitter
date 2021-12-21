@@ -1,11 +1,11 @@
 <form [formGroup]="corrform"  (ngSubmit)="getData()">
     <div class="form-group row">
-      <label for="lon" class="col-sm-2 col-form-label">Longitude</label>
-      <div class="col-sm-10">
+      <label for="lon" class="col-sm-2 col-form-label">Longitude</label><br><br>
+      <div class="col-sm-10"> 
         <input type="number" class="form-control" id="lon" formControlName="lon">
       </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row"><br>
       <label for="lat" class="col-sm-2 col-form-label">Latitude</label>
       <div class="col-sm-10">
         <input type="number" class="form-control" id="lat" formControlName="lat">
@@ -15,19 +15,16 @@
 
 
     <div class="form-group row">
-      <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary">Sign in</button>
+      <div class="col-sm-10"> <br>
+        <button type="submit" class="btn btn-primary">Search</button>
       </div>
     </div>
   </form>
 
-  <app-bar-plot [values] ="outValues" [mbarChartLabels]="outKeys"  *ngIf="display"></app-bar-plot>
-
-
-    <div *ngFor="let tweet of tweets">
-   
-       <b>{{tweet._source.created_at}}</b> <br>
-       <b>{{tweet._source.text}}</b> <br>
-       <b>{{tweet._source.coordinates}}</b> <br><br>
-       <hr>
-     </div>
+  <app-bar-plot 
+  
+  *ngIf="display"
+  [mbarChartLabels]="outKeys"  
+  [values] ="outValues" 
+  
+  ></app-bar-plot>

@@ -47,7 +47,7 @@ export class FormMapComponent implements OnInit {
       lat:this.corrform.get('lat')?.value 
      }
    
-    this.service.getTweets(coordinates)
+    this.service.getTweetsRectangle(coordinates)
     .subscribe((Tweets:Array<object>) => {
       // stor all the dates which come from response
      this.tweets = Tweets

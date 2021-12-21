@@ -1,5 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ChartDataset} from 'chart.js';
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ChartComponent,
+  ApexDataLabels,
+  ApexPlotOptions,
+  ApexYAxis,
+  ApexTitleSubtitle,
+  ApexXAxis,
+  ApexFill
+} from "ng-apexcharts";
+
+
 
 @Component({
   selector: 'app-bar-plot',
@@ -8,28 +20,58 @@ import { ChartDataset} from 'chart.js';
 })
 export class BarPlotComponent implements OnInit {
 
-  barChartOptions:any = {
-    scaleShowVerticalLines: true,
-    responsive: true
-  };
-
   @Input()
   mbarChartLabels:string[] = [];
 
   @Input()
-  values:Array<number> = []
-
-  barChartData: ChartDataset[] = [];
+  values:Array<number> = []
   
 
-  constructor() { }
+  series: ApexAxisChartSeries  = []
+
+  title: ApexTitleSubtitle = {
+    
+    text: "Monthly ",
+    floating: false,
+    offsetY: 320,
+    align: "center",
+    style: {
+      color: "#444"
+    }
+  }
+
+  chart:ApexChart = {
+    height: 350,
+    type: "bar"
+  }
+
+  xaxis:ApexXAxis = {
+    //categories: [ "Jan", "Feb", "Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+
+    position: "top",
+    labels: {
+      offsetY: -18
+    }
+  }
+
+  plotOptions:ApexPlotOptions = {
+    bar: {
+      borderRadius: 10
+    }
+  }
+
+  constructor() {
+
+  }
 
   ngOnInit(): void {
 
-  this.barChartData.push({data: this.values, label: 'month'})
 
-    console.log(this.values)
-    console.log(this.mbarChartLabels)
+  this.xaxis.categories = this.mbarChartLabels;
+  this.series.push({data: this.values, name: "Month"})
+
+
   }
 
 }
+

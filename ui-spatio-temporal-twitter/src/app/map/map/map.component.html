@@ -1,6 +1,16 @@
-<div class="map-container">
+<!-- <div class="map-container">
     <div class="map-frame">
       <div id="map"></div>
     </div>
   </div>
+ -->
+ <div id="map"></div>
 
+
+ <app-bar-plot 
+  
+ *ngIf="display"
+ [mbarChartLabels]="outKeys"  
+ [values] ="outValues" 
+ 
+ ></app-bar-plot>
