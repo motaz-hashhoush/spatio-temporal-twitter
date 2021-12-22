@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from '../map.service'
+import { MatDialog } from '@angular/material/dialog';
+import { BarPlotComponent } from '../bar-plot/bar-plot.component'
+import { WordCloudComponent } from '../word-cloud/word-cloud.component'
 import * as L from 'leaflet';
 import 'leaflet.pm';
 import 'leaflet.pm/dist/leaflet.pm.css';
@@ -20,9 +23,12 @@ export class MapComponent implements OnInit {
   outKeys:Array<string> = [];
  
 
-  constructor(private service:MapService) { }
+  constructor(private service:MapService,
+              private dialog:MatDialog, freqWordCloud:MatDialog
+              ) { }
 
   showPlot(): void {
+    
     this.outValues =  Object.values(this.dic_tweets);
     this.outKeys =   Object.keys(this.dic_tweets)
     this.display = true;
@@ -30,6 +36,15 @@ export class MapComponent implements OnInit {
     console.log("outKeys", this.outKeys)
     console.log("outValues", this.outValues)
 
+  
+    const plot = this.dialog.open(BarPlotComponent, 
+      {
+        data: { 
+        xaxis:this.outKeys,
+        series: this.outValues,
+        tweets: this.tweets
+      }
+    })
   }
 
   getTheData(body: Object): void {
@@ -40,7 +55,7 @@ export class MapComponent implements OnInit {
           // stor all the dates which come from response
           this.tweets = tweet
 
-          console.log("im in subscribe", this.tweets.length)
+          console.log("im in subscribe the length of tweets is", this.tweets.length)
 
           for(let value of this.tweets) {
 
@@ -61,6 +76,8 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMap()
+
+    
   }
 
   initMap(): void {
@@ -120,6 +137,37 @@ export class MapComponent implements OnInit {
     
   }
 
+  tagArray:Array<object> =[]
+  disply = false;
+
+  wordCloud() {
+
+    this.service.getFreq().subscribe( (data:any) =>{
+
+      for(let i of data){
+
+        this.tagArray.push({
+          name: i.key,
+          value: i.doc_count
+        })
+
+      }
+      console.log("map  wordCloud()", this.tagArray.length)
+      console.log("map  wordCloud() tagArray[0]", this.tagArray[0])
+
+      this.dialog.open(WordCloudComponent,
+         {
+           data: {
+          tagArray:this.tagArray
+        }
+        
+        })
+
+    
+    })
+
+   
+  }
 
 }
 

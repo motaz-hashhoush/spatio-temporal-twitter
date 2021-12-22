@@ -30,38 +30,7 @@ app.listen(PORT, () =>{
     console.log(`server started in port ${PORT}`)
 })
 
-   /*
-app.get('/api/v1/get/qurey/:lon/:lat', async (req, res) => {
-
-    
-    console.log(req.params.lon)
-    console.log(req.params.lat)
-    console.log(req.body)
-    
-  const searchResult = await client.search({index: indexName, body: {
-
-    size:10000,
-    query:{
-        bool:{
-            must:{
-                match_all: {}
-            },
-            filter: {
-             geo_distance: {
-                  distance: "5000km",
-                  coordinates:{
-                      lat: req.params.lat,
-                      lon: req.params.lon
-                   }
-           }
-        }
-        }
-    }
-}})
-
-  res.status(200).json(searchResult.hits.hits)
-}) 
-*/
+let freq_agg;
 
 app.post('/api/v1/get/qurey/', async (req, res) => {
 
@@ -92,9 +61,26 @@ app.post('/api/v1/get/qurey/', async (req, res) => {
                 }
             }
         }
+    },
+    "aggs" : {
+        "freq_agg" : {
+            "terms": {
+                "field" : "text",
+                "size": 150,
+                "min_doc_count": 60
+            }
+      }
     }
 }})
 
+    freq_agg =  searchResult.aggregations.freq_agg
 
   res.status(200).json(searchResult.hits.hits)
+})
+
+app.get('/api/v1/get/freq/', (req, res) =>{
+
+    console.log(freq_agg['buckets'].length)
+
+    res.status(200).json(freq_agg['buckets'])
 })

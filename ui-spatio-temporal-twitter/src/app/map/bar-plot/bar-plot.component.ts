@@ -1,4 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MatDialog } from '@angular/material/dialog';
+import { WordCloudComponent } from '../word-cloud/word-cloud.component'
+import { MapService } from '../map.service'
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -20,18 +24,23 @@ import {
 })
 export class BarPlotComponent implements OnInit {
 
-  @Input()
-  mbarChartLabels:string[] = [];
 
-  @Input()
-  values:Array<number> = []
+
+  constructor(private service:MapService, public dialog:MatDialog, 
+    
+    @Inject(MAT_DIALOG_DATA) private data:
+  {
+    xaxis:string[], 
+    series:Array<number>,
+    tweets: Array<any>
+  }) {}
+
+  displayTweets:Array<any> = []
   
-
   series: ApexAxisChartSeries  = []
-
   title: ApexTitleSubtitle = {
     
-    text: "Monthly ",
+    text: "Monthly",
     floating: false,
     offsetY: 320,
     align: "center",
@@ -42,7 +51,25 @@ export class BarPlotComponent implements OnInit {
 
   chart:ApexChart = {
     height: 350,
-    type: "bar"
+    type: "bar",
+    events: {
+      click:  (event, chartContext, config) => {
+
+        this.displayTweets = []
+      
+        console.log("config", config.dataPointIndex)
+        console.log("event", this.data.xaxis[config.dataPointIndex])
+
+        for(let i =0; i < this.data.tweets.length; i++){
+          
+          let date = this.data.tweets[i]._source.created_at.substring(0, 7);
+          
+           if(date == this.data.xaxis[config.dataPointIndex]){
+            this.displayTweets.push(this.data.tweets[i]._source)
+           }
+        }
+      }
+    }
   }
 
   xaxis:ApexXAxis = {
@@ -60,18 +87,43 @@ export class BarPlotComponent implements OnInit {
     }
   }
 
-  constructor() {
+  tagArray:Array<Object> = []
 
-  }
 
   ngOnInit(): void {
 
 
-  this.xaxis.categories = this.mbarChartLabels;
-  this.series.push({data: this.values, name: "Month"})
-
-
+    this.xaxis.categories = this.data.xaxis;
+    this.series.push({data: this.data.series, name: "Frequency"})
   }
 
+  wordCloud() {
+
+    this.service.getFreq().subscribe( (data:any) =>{
+
+      for(let i of data){
+
+        this.tagArray.push({
+          name: i.key,
+          value: i.doc_count
+        })
+
+      }
+      console.log("map  wordCloud()", this.tagArray.length)
+      console.log("map  wordCloud() tagArray[0]", this.tagArray[0])
+
+      this.dialog.open(WordCloudComponent,
+         {
+           data: {
+          tagArray:this.tagArray
+        }
+        
+        })
+
+     // this.freqWordCloud.open(WordCloudComponent, {data: this.tagArray})
+    })
+
+   
+  }
 }
 

@@ -1,15 +1,61 @@
 
+<h3 mat-dialog-title>Bar Plot For The Bounding Box</h3>
 
 
 <div class="bar">
-
     <apx-chart 
     [series]="series" 
     [chart]="chart" 
     [title]="title"
     [xaxis]="xaxis"
-    [plotOptions] ="plotOptions"
+    [plotOptions] ="plotOptions"  
     
-    ></apx-chart>
+    ></apx-chart> 
+
+  
+
+    <button (click)="wordCloud()" type="button" class="btn btn-primary"> Word Cloud </button>
 </div>
 
+
+
+
+
+<span *ngFor="let tweet of displayTweets">
+    
+
+<div class="tw-block-parent">
+    <div class="timeline-TweetList-tweet">
+      <div class="timeline-Tweet">
+        <div class="timeline-Tweet-brand">
+          <div class="Icon Icon--twitter"></div>
+        </div>
+        <div class="timeline-Tweet-author">
+          <div class="TweetAuthor"><a class="TweetAuthor-link" href="#channel"> </a><span class="TweetAuthor-avatar"> 
+              <div class="Avatar"> </div></span><span class="TweetAuthor-name"> TwitterUser</span><span class="Icon Icon--verified"> </span>
+              <span class="TweetAuthor-screenName">{{tweet.created_at}}</span></div>
+        </div>
+       
+        <div class="timeline-Tweet-text">
+
+           {{tweet.text}}
+            
+        </div>
+        <h6> </h6>
+      
+        
+        <div class="timeline-Tweet-metadata"><span class="timeline-Tweet-timestamp">
+             <b>  longitude: {{tweet.coordinates[0]}} , latitude: {{tweet.coordinates[1]}} </b>
+            
+            </span></div>
+        <ul class="timeline-Tweet-actions">
+          <li class="timeline-Tweet-action"><a class="Icon Icon--heart" href="#"></a></li>
+          <li class="timeline-Tweet-action"><a class="Icon Icon--share" href="#"></a></li>
+          <br>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</span>

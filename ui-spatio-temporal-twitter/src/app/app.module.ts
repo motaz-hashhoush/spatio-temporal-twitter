@@ -14,8 +14,10 @@ import { NgApexchartsModule } from 'ng-apexcharts'
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
 import { DrawMapComponent } from './map/draw-map/draw-map.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { WordCloudComponent } from './map/word-cloud/word-cloud.component';
 
-
+import { Ang2TagCloudModule } from 'ang2-tag-cloud';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +25,7 @@ import { DrawMapComponent } from './map/draw-map/draw-map.component';
     FormMapComponent,
     BarPlotComponent,
     DrawMapComponent,
+    WordCloudComponent,
     
   ],
   imports: [
@@ -34,7 +37,9 @@ import { DrawMapComponent } from './map/draw-map/draw-map.component';
     BrowserAnimationsModule,
     NgApexchartsModule,
     LeafletDrawModule,
-    LeafletModule
+    LeafletModule,
+    MatDialogModule,
+    Ang2TagCloudModule
 
   ],
   providers: [],
