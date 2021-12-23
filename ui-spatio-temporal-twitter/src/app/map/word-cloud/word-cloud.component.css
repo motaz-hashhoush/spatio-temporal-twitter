@@ -1,12 +1,11 @@
-
-.side-nav{
-    max-block-size: 100px;
+.side-nav {
+  border: 1.5px solid black;
+  border-radius: 2px;
 }
 
-.mat-typography{
-
-    width: 50%;
-    height: 300px;
-    margin: auto;
-    padding: 10px;
+.mat-typography {
+  width: 50%;
+  height: 300px;
+  margin: auto;
+  padding: 10px;
 }

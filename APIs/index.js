@@ -73,14 +73,7 @@ app.post('/api/v1/get/qurey/', async (req, res) => {
     }
 }})
 
-    freq_agg =  searchResult.aggregations.freq_agg
+ 
 
-  res.status(200).json(searchResult.hits.hits)
-})
-
-app.get('/api/v1/get/freq/', (req, res) =>{
-
-    console.log(freq_agg['buckets'].length)
-
-    res.status(200).json(freq_agg['buckets'])
+  res.status(200).json([searchResult.aggregations.freq_agg.buckets, searchResult.hits.hits])
 })

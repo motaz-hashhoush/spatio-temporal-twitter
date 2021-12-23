@@ -24,6 +24,7 @@ import {
 })
 export class BarPlotComponent implements OnInit {
 
+  show:Boolean = true;
 
 
   constructor(private service:MapService, public dialog:MatDialog, 
@@ -32,7 +33,8 @@ export class BarPlotComponent implements OnInit {
   {
     xaxis:string[], 
     series:Array<number>,
-    tweets: Array<any>
+    tweets: Array<any>,
+    freq: Array<any>
   }) {}
 
   displayTweets:Array<any> = []
@@ -99,9 +101,9 @@ export class BarPlotComponent implements OnInit {
 
   wordCloud() {
 
-    this.service.getFreq().subscribe( (data:any) =>{
+     this.show = false;
 
-      for(let i of data){
+      for(let i of this.data.freq){
 
         this.tagArray.push({
           name: i.key,
@@ -109,20 +111,13 @@ export class BarPlotComponent implements OnInit {
         })
 
       }
-      console.log("map  wordCloud()", this.tagArray.length)
-      console.log("map  wordCloud() tagArray[0]", this.tagArray[0])
 
-      this.dialog.open(WordCloudComponent,
-         {
+      this.dialog.open(WordCloudComponent, {
+
            data: {
           tagArray:this.tagArray
-        }
-        
+        } 
         })
-
-     // this.freqWordCloud.open(WordCloudComponent, {data: this.tagArray})
-    })
-
    
   }
 }

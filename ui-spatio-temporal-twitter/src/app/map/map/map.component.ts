@@ -17,6 +17,7 @@ export class MapComponent implements OnInit {
   map:any;
   dic_tweets: {[month:string]: number;} = {};
   tweets: Array<any> = [];
+  freq: Array<any> = [];
 
   display:boolean = false
   outValues:Array<number> = [];
@@ -42,7 +43,8 @@ export class MapComponent implements OnInit {
         data: { 
         xaxis:this.outKeys,
         series: this.outValues,
-        tweets: this.tweets
+        tweets: this.tweets,
+        freq: this.freq
       }
     })
   }
@@ -53,7 +55,9 @@ export class MapComponent implements OnInit {
         .subscribe((tweet: any) => {
 
           // stor all the dates which come from response
-          this.tweets = tweet
+          [this.freq, this.tweets] = tweet
+
+          
 
           console.log("im in subscribe the length of tweets is", this.tweets.length)
 
