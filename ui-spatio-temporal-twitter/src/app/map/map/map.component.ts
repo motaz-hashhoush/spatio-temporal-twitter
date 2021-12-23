@@ -19,7 +19,8 @@ export class MapComponent implements OnInit {
   tweets: Array<any> = [];
   freq: Array<any> = [];
 
-  display:boolean = false
+  display:boolean = false;
+  show:boolean = false;
   outValues:Array<number> = [];
   outKeys:Array<string> = [];
  
@@ -29,6 +30,8 @@ export class MapComponent implements OnInit {
               ) { }
 
   showPlot(): void {
+
+    this.show = true;
     
     this.outValues =  Object.values(this.dic_tweets);
     this.outKeys =   Object.keys(this.dic_tweets)
@@ -47,17 +50,18 @@ export class MapComponent implements OnInit {
         freq: this.freq
       }
     })
+  
   }
+
 
   getTheData(body: Object): void {
 
     this.service.getTweetsRectangle(body)
+
         .subscribe((tweet: any) => {
 
           // stor all the dates which come from response
           [this.freq, this.tweets] = tweet
-
-          
 
           console.log("im in subscribe the length of tweets is", this.tweets.length)
 
@@ -81,7 +85,6 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
     this.initMap()
 
-    
   }
 
   initMap(): void {
@@ -107,12 +110,13 @@ export class MapComponent implements OnInit {
     });
 
 
-    this.map.on('pm:create',(e: any)=>{
+    this.map.on('pm:create', (e: any)=> {
+
       if(e.shape == 'Rectangle') {
-    
       
         let LatLngs = e.layer.getLatLngs()
         console.log(LatLngs)
+
         let toQurey = {
   
           top_left: {
@@ -135,42 +139,13 @@ export class MapComponent implements OnInit {
         console.log(e.layer.getLatLng())
       }
 
-
     })
 
-    
   }
+  clean_everythin() {
 
-  tagArray:Array<object> =[]
-  disply = false;
-
-  wordCloud() {
-
-    this.service.getFreq().subscribe( (data:any) =>{
-
-      for(let i of data){
-
-        this.tagArray.push({
-          name: i.key,
-          value: i.doc_count
-        })
-
-      }
-      console.log("map  wordCloud()", this.tagArray.length)
-      console.log("map  wordCloud() tagArray[0]", this.tagArray[0])
-
-      this.dialog.open(WordCloudComponent,
-         {
-           data: {
-          tagArray:this.tagArray
-        }
-        
-        })
-
-    
-    })
-
-   
+    if(confirm("Do you want to clean the everythin"))
+        window.location.reload();
   }
 
 }

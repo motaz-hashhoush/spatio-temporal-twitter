@@ -11,6 +11,8 @@
     [plotOptions] ="plotOptions"  
     
     ></apx-chart> 
+    <p> <b> Click to any bar to display all tweets in this date </b></p>
+    <p> <b> Click to any empty place to delete all tweets </b></p>
 
   
 
@@ -21,9 +23,8 @@
 
 
 
-<span *ngFor="let tweet of displayTweets">
-    
 
+<span *ngFor="let tweet of displayTweets">
 <div class="tw-block-parent">
     <div class="timeline-TweetList-tweet">
       <div class="timeline-Tweet">
