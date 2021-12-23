@@ -11,4 +11,4 @@ The user of the system should see a one-page Web App that displays a map of a ce
  2. word cloud
 
 <br> <br> 
-See the distribution of tasks <a href="https://mud-risk-c1e.notion.site/Spatio-Temporal-Analysis-1927a3d43f9d4a338a23cdca40c44c07"> Task</a>
+See the distribution of tasks <a href="https://mud-risk-c1e.notion.site/Spatio-Temporal-Analysis-1927a3d43f9d4a338a23cdca40c44c07"> Task</a> from start to finish
